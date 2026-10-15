@@ -16,7 +16,10 @@ const routes = {
   'blog/preparar-tu-carga': 'Cómo preparar tu carga', 'blog/logistica-que-crece': 'Una logística que crece con tu negocio', 'blog/documentos-seguros': 'El valor de una entrega confidencial',
 };
 const renderers = { '': 'home()', nosotros: 'about()', servicios: 'servicesPage()', cobertura: 'coveragePage()', blog: 'blogPage()', contacto: 'contactPage()', clientes: 'clientPage()', privacidad: 'privacyPage()' };
-const siteOrigin = (process.env.SITE_ORIGIN || 'https://bjjrage.github.io').replace(/\/$/, '');
+const netlifyOrigin = process.env.NETLIFY === 'true'
+  ? (process.env.CONTEXT === 'production' ? process.env.URL : process.env.DEPLOY_PRIME_URL || process.env.URL)
+  : '';
+const siteOrigin = (process.env.SITE_ORIGIN || netlifyOrigin || 'https://bjjrage.github.io').replace(/\/$/, '');
 const basePath = (process.env.BASE_PATH ?? '/nexora-logistic').replace(/\/$/, '');
 if (basePath && !/^\/[a-zA-Z0-9_-]+$/.test(basePath)) throw new Error('BASE_PATH must be empty or a single repository path.');
 const siteURL = siteOrigin + basePath;

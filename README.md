@@ -43,6 +43,14 @@ Abrir http://localhost:4174/nexora-logistic/.
 
 Inicio, Nosotros, Servicios, cuatro fichas de servicio, Cobertura, Novedades, tres artículos, Contacto, Clientes y Privacidad.
 
+## Publicar en Netlify
+
+Importar `bjjrage/nexora-logistic` desde GitHub en el espacio de Nexora, seleccionando `main` como rama de producción y dejando vacío el directorio base. El archivo `netlify.toml` configura Node.js 24, el comando `npm run check && npm run build`, la carpeta de publicación `dist` y las rutas desde la raíz del dominio.
+
+Netlify proporciona automáticamente `URL` y `DEPLOY_PRIME_URL`. El build usa la primera para los enlaces canónicos y el sitemap de producción, y la segunda en las vistas previas. Al conectar `nexoralogistic.com.py` como dominio principal, volver a desplegar para actualizar esos enlaces. `SITE_ORIGIN` permite sobrescribir el origen cuando sea necesario.
+
+El portal publicado sigue siendo una demostración; la autenticación y los datos de clientes requieren su integración independiente.
+
 ## Comportamientos incluidos
 
 - Navegación e historial, menú móvil y estados de foco.
