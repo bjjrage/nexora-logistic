@@ -27,7 +27,9 @@ node scripts/build.mjs
 
 El resultado está en `dist/`, con archivos HTML independientes para 15 rutas. El desarrollo comparte la navegación, la cabecera, el pie y las plantillas mediante JavaScript sin dependencias de ejecución externas.
 
-El build utiliza `BASE_PATH=/nexora-logistic` y `SITE_ORIGIN=https://bjjrage.github.io` por defecto. El workflow adapta ambos valores al propietario y nombre del repositorio.
+El build utiliza `BASE_PATH=/nexora-logistic` y `SITE_ORIGIN=https://bjjrage.github.io` por defecto. El workflow toma el origen y la ruta directamente de la configuración de GitHub Pages, incluido el dominio personalizado cuando esté activado.
+
+Dominio previsto: `nexoralogistic.com.py`. Para activarlo, primero hay que configurar su proveedor DNS: actualmente NIC.py lo delega a `dns1pendiente.nic.py` y `dns2pendiente.nic.py`. La dirección de GitHub Pages se mantiene activa mientras se prepara la delegación.
 
 Para comprobar localmente el sitio generado con el mismo prefijo que GitHub Pages:
 
