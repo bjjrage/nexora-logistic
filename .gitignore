@@ -3,6 +3,8 @@ dist/
 artifacts/
 .local/
 .netlify/
+supabase/.temp/
+supabase/.branches/
 .env
 .env.local
 *.zip
