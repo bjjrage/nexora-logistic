@@ -4,8 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node scripts/serve.mjs",
+    "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
-    "check": "node --check public/app.js"
+    "check": "node --check public/app.js && node --check public/portal-auth.js && node --check public/auth-config.js && node --check scripts/build.mjs && node --check scripts/dev.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.118.0"
   }
 }

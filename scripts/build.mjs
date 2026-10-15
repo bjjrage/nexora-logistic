@@ -6,6 +6,8 @@ const root = path.resolve(import.meta.dirname, '..');
 const output = path.join(root, 'dist');
 await mkdir(output, { recursive: true });
 await cp(path.join(root, 'public'), output, { recursive: true });
+await cp(path.join(root, 'node_modules/@supabase/supabase-js/dist/umd/supabase.js'), path.join(output, 'vendor/supabase.js'));
+await cp(path.join(root, 'node_modules/@supabase/supabase-js/LICENSE'), path.join(output, 'vendor/SUPABASE-LICENSE'));
 const html = await readFile(path.join(root, 'public/index.html'), 'utf8');
 const appSource = await readFile(path.join(root, 'public/app.js'), 'utf8');
 const context = vm.createContext({});
@@ -23,6 +25,12 @@ const siteOrigin = (process.env.SITE_ORIGIN || netlifyOrigin || 'https://bjjrage
 const basePath = (process.env.BASE_PATH ?? '/nexora-logistic').replace(/\/$/, '');
 if (basePath && !/^\/[a-zA-Z0-9_-]+$/.test(basePath)) throw new Error('BASE_PATH must be empty or a single repository path.');
 const siteURL = siteOrigin + basePath;
+if (process.env.NETLIFY === 'true' && process.env.URL) {
+  const configSource = await readFile(path.join(root, 'public/auth-config.js'), 'utf8');
+  await writeFile(path.join(output, 'auth-config.js'), configSource
+    .replace(/loginOrigin: '[^']*'/, `loginOrigin: ${JSON.stringify(new URL(process.env.URL).origin)}`)
+    .replace('portalPublished: false', 'portalPublished: true'));
+}
 const prefixPaths = content => content.replace(/\b(href|src)="\/(?!\/)/g, `$1="${basePath}/`).replace(/url\((['"]?)\/(?!\/)/g, `url($1${basePath}/`);
 for (const [route, title] of Object.entries({ '': 'Confianza en movimiento', ...routes })) {
   await mkdir(path.join(output, route), { recursive: true });

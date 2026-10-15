@@ -24,8 +24,10 @@ jobs:
           node-version: '24'
       - uses: actions/configure-pages@v5
         id: pages
+      - name: Instalar dependencias
+        run: npm ci --ignore-scripts
       - name: Verificar JavaScript
-        run: node --check public/app.js
+        run: npm run check && npm test
       - name: Generar las páginas
         run: node scripts/build.mjs
         env:

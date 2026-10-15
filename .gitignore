@@ -3,4 +3,6 @@ dist/
 artifacts/
 .local/
 .netlify/
+.env
+.env.local
 *.zip
