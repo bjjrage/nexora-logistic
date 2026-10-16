@@ -1,3 +1,4 @@
+import {mountLivePanel,hideLivePanel} from './portal-live.js';
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const moduleBase = new URL('.', import.meta.url);
 let clientPromise;
@@ -135,6 +136,7 @@ function accountView(root, client, state) {
 
 export async function mountPortal(root) {
   const currentRevision = ++revision;
+  hideLivePanel();
   const current = () => root.isConnected && currentRevision === revision && document.querySelector('#customer-auth-root') === root;
   paint(root,`${heading('Conectando tu cuenta.','Estamos comprobando el acceso.')}<div class="auth-loading" role="status"><span></span> Un momento…</div>`);
   try {
@@ -154,6 +156,13 @@ export async function mountPortal(root) {
     if (state.kind === 'signed-out') {
       const enabled = await googleEnabled(config);
       if (current()) signInView(root,client,config,enabled,callbackFailed);
+    } else if(state.kind==='active') {
+      const panel=document.querySelector('#customer-panel');
+      await mountLivePanel(panel,client,state,async()=>{
+        const {error}=await client.auth.signOut({scope:'local'});
+        if(error){window.alert('No pudimos cerrar la sesión. Volvé a intentar.');return;}
+        await mountPortal(root);
+      });
     } else accountView(root,client,state);
   } catch {
     if (!current()) return;

@@ -6,10 +6,13 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
-    "check": "node --check public/app.js && node --check public/portal-auth.js && node --check public/auth-config.js && node --check scripts/build.mjs && node --check scripts/dev.mjs",
+    "check": "node --check public/app.js && node --check public/portal-auth.js && node --check public/auth-config.js && node --check scripts/build.mjs && node --check scripts/dev.mjs && node --check public/portal-live.js",
     "test": "node --test"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.118.0"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.10"
   }
 }

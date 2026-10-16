@@ -50,28 +50,7 @@ No se necesita Client Secret en Netlify. `public/auth-config.js` contiene única
 
 ## 4. Probar y habilitar una empresa
 
-Abrir `/clientes/` en producción e ingresar con Google. La primera entrada debe mostrar «Falta un paso». En Supabase → Authentication → Users, verificar la cuenta y copiar su UUID.
-
-En el SQL Editor, como administrador de Nexora, crear la empresa:
-
-```sql
-insert into public.portal_companies (name)
-values ('NOMBRE REAL DE LA EMPRESA')
-returning id;
-```
-
-Usar ese ID y el UUID verificado del usuario:
-
-```sql
-insert into public.portal_memberships (user_id, company_id, status)
-values ('UUID_DEL_USUARIO', 'UUID_DE_LA_EMPRESA', 'active');
-```
-
-Para agregar otra persona de la misma empresa, crear otra membresía con el mismo `company_id`. Cada persona tiene una empresa asignada en esta versión. La cuenta no se habilita por dominio de email ni por datos editables del perfil de Google.
-
-Para pausar una cuenta, cambiar su membresía a `status = 'suspended'`. Para pausar una empresa completa, cambiar `portal_companies.active` a `false`. La siguiente consulta del portal comprobará el nuevo permiso. Cerrar y volver a abrir sesión para comprobarlo visualmente.
-
-El portal muestra la identidad y la empresa habilitada. También conserva el panel de demostración original, recuperado del historial anterior al login: Mis envíos, Documentos y Resumen. Sus ejemplos son públicos y están identificados como ficticios; no otorgan permisos ni consultan operaciones. Los envíos, documentos y reportes operativos todavía requieren una integración de datos; no se publican datos del sistema interno.
+El alta se administra desde Nexora OS, donde se selecciona el cliente real y su correo Google. Seguir [PORTAL_OPERATIVO.md](PORTAL_OPERATIVO.md). El panel consulta envíos, comprobantes y solicitudes de la empresa vinculada; las cuentas sin asignación siguen pendientes.
 
 ## 5. Conectar el dominio
 

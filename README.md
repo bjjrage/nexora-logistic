@@ -59,7 +59,7 @@ Importar `bjjrage/nexora-logistic` desde GitHub en el espacio de Nexora, selecci
 
 Netlify proporciona automáticamente `URL` y `DEPLOY_PRIME_URL`. El build usa la primera para los enlaces canónicos y el sitemap de producción, y la segunda en las vistas previas. Al conectar `nexoralogistic.com.py` como dominio principal, volver a desplegar para actualizar esos enlaces. `SITE_ORIGIN` permite sobrescribir el origen cuando sea necesario.
 
-El acceso con Google y los permisos por empresa están implementados. Para activar el proveedor y habilitar clientes, seguir [la guía de autenticación](docs/AUTH_GOOGLE.md). El login se habilita en el origen de producción de Netlify; GitHub Pages muestra el aviso de preparación. Los envíos y documentos operativos requieren su integración posterior.
+El portal consulta los envíos y comprobantes reales del OS y guarda solicitudes de envío. Para habilitar cuentas y operar, seguir [la guía del portal](docs/PORTAL_OPERATIVO.md). Google identifica al usuario y Nexora asigna su empresa.
 
 ## Comportamientos incluidos
 
@@ -68,7 +68,7 @@ El acceso con Google y los permisos por empresa están implementados. Para activ
 - Artículos filtrables, enlaces internos y copia del enlace para compartir.
 - Preguntas frecuentes desplegables.
 - Formulario con validación, resumen editable, descarga TXT y preparación de correo `mailto:`. No envía datos a un servidor ni afirma que el correo fue enviado.
-- Portal con Google, sesión persistente, cierre de sesión, cuentas pendientes o suspendidas y acceso por empresa validado con Supabase y RLS. Conserva el panel original de demostración: Mis envíos, Documentos y Resumen, con sus ejemplos claramente identificados. La demostración es pública y no consulta datos operativos ni publica datos del sistema interno.
+- Portal con Google, permisos por empresa, envíos y comprobantes del OS, resumen real y solicitudes persistidas. No contiene datos de demostración. Ver [la guía operativa](docs/PORTAL_OPERATIVO.md).
 
 ## Antes del lanzamiento comercial
 
