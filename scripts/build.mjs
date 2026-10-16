@@ -13,11 +13,11 @@ const appSource = await readFile(path.join(root, 'public/app.js'), 'utf8');
 const context = vm.createContext({});
 vm.runInContext(appSource.slice(0, appSource.indexOf('const routeTitles')), context);
 const routes = {
-  nosotros: 'Nosotros', servicios: 'Soluciones logísticas', cobertura: 'Cobertura nacional', blog: 'Ideas en movimiento', contacto: 'Contacto y cotización', clientes: 'Acceso clientes', privacidad: 'Privacidad',
+  nosotros: 'Nosotros', servicios: 'Soluciones logísticas', cobertura: 'Cobertura nacional', blog: 'Ideas en movimiento', contacto: 'Contacto y cotización', clientes: 'Seguimiento de pedidos', seguimiento: 'Seguimiento de pedidos', privacidad: 'Privacidad',
   'servicios/transporte-terrestre': 'Transporte terrestre', 'servicios/almacenaje-distribucion': 'Almacenaje y distribución', 'servicios/logistica-integral': 'Logística integral', 'servicios/documentos-confidenciales': 'Documentos confidenciales',
   'blog/preparar-tu-carga': 'Cómo preparar tu carga', 'blog/logistica-que-crece': 'Una logística que crece con tu negocio', 'blog/documentos-seguros': 'El valor de una entrega confidencial',
 };
-const renderers = { '': 'home()', nosotros: 'about()', servicios: 'servicesPage()', cobertura: 'coveragePage()', blog: 'blogPage()', contacto: 'contactPage()', clientes: 'clientPage()', privacidad: 'privacyPage()' };
+const renderers = { '': 'home()', nosotros: 'about()', servicios: 'servicesPage()', cobertura: 'coveragePage()', blog: 'blogPage()', contacto: 'contactPage()', clientes: 'clientPage()', seguimiento: 'trackingPage()', privacidad: 'privacyPage()' };
 const netlifyOrigin = process.env.NETLIFY === 'true'
   ? (process.env.CONTEXT === 'production' ? process.env.URL : process.env.DEPLOY_PRIME_URL || process.env.URL)
   : '';
@@ -52,6 +52,6 @@ for (const relative of ['styles.css', 'fonts/fonts.css']) {
   await writeFile(filename, prefixPaths(await readFile(filename, 'utf8')));
 }
 await writeFile(path.join(output, '.nojekyll'), '');
-await writeFile(path.join(output, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n');
+await writeFile(path.join(output, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n');
 async function count(dir) { let n = 0; for (const entry of await readdir(dir, { withFileTypes: true })) n += entry.isDirectory() ? await count(path.join(dir, entry.name)) : 1; return n; }
 console.log(`Built Nexora Logistic: ${Object.keys(routes).length + 1} pages, ${await count(output)} files.`);

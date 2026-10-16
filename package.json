@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
-    "check": "node --check public/app.js && node --check public/portal-auth.js && node --check public/auth-config.js && node --check scripts/build.mjs && node --check scripts/dev.mjs && node --check public/portal-live.js",
+    "check": "node --check public/app.js && node --check public/portal-auth.js && node --check public/auth-config.js && node --check scripts/build.mjs && node --check scripts/dev.mjs && node --check public/portal-live.js && node --check public/tracking.js",
     "test": "node --test"
   },
   "dependencies": {

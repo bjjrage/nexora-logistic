@@ -2,7 +2,7 @@
 
 Web pública: https://nexoralogisticpy.netlify.app
 
-Portal con Google: https://nexoralogisticpy.netlify.app/clientes/
+Seguimiento público de pedidos: https://nexoralogisticpy.netlify.app/seguimiento/
 
 Copia en GitHub Pages: https://bjjrage.github.io/nexora-logistic/
 
@@ -31,11 +31,11 @@ npm.cmd test
 npm.cmd run build
 ```
 
-El resultado está en `dist/`, con archivos HTML independientes para 15 rutas. La biblioteca de Supabase se copia desde la dependencia fijada en el lockfile y se sirve localmente. El portal se conecta al servicio Supabase para autenticación y permisos.
+El resultado está en `dist/`, con archivos HTML independientes para 16 rutas. La biblioteca de Supabase se copia desde la dependencia fijada en el lockfile y se sirve localmente. El seguimiento consulta Supabase mediante un código de pedido, sin iniciar sesión.
 
 El build utiliza `BASE_PATH=/nexora-logistic` y `SITE_ORIGIN=https://bjjrage.github.io` por defecto. El workflow toma el origen y la ruta directamente de la configuración de GitHub Pages, incluido el dominio personalizado cuando esté activado.
 
-Dominio previsto: `nexoralogistic.com.py`. Para activarlo, primero hay que configurar su proveedor DNS: actualmente NIC.py lo delega a `dns1pendiente.nic.py` y `dns2pendiente.nic.py`. La dirección de GitHub Pages se mantiene activa mientras se prepara la delegación.
+Dominio previsto: nexoralogistic.com.py. Los nameservers de Netlify fueron enviados a NIC.py; falta comprobar la propagación y el certificado HTTPS. Mientras tanto se usa la dirección Netlify.
 
 Para comprobar localmente el sitio generado con el mismo prefijo que GitHub Pages:
 
@@ -47,11 +47,11 @@ Abrir http://localhost:4174/nexora-logistic/.
 
 ## Páginas
 
-Inicio, Nosotros, Servicios, cuatro fichas de servicio, Cobertura, Novedades, tres artículos, Contacto, Clientes y Privacidad.
+Inicio, Nosotros, Servicios, cuatro fichas de servicio, Cobertura, Novedades, tres artículos, Contacto, Seguimiento, ruta de clientes anterior y Privacidad.
 
 ## Publicar en Netlify
 
-Sitio público actual: https://nexoralogisticpy.netlify.app. Para actualizarlo manualmente, seguir [la guía de despliegue](docs/DEPLOY_NETLIFY.md). Google está habilitado en Supabase y en producción; se verificaron ingreso real, persistencia y salida. Las cuentas nuevas necesitan que Nexora les asigne una empresa.
+Sitio público actual: https://nexoralogisticpy.netlify.app. Para actualizarlo manualmente, seguir [la guía de despliegue](docs/DEPLOY_NETLIFY.md). La web ofrece seguimiento de pedidos sin login; las cuentas de clientes pertenecen al OS.
 
 ### Conexión futura con GitHub
 
@@ -59,7 +59,7 @@ Importar `bjjrage/nexora-logistic` desde GitHub en el espacio de Nexora, selecci
 
 Netlify proporciona automáticamente `URL` y `DEPLOY_PRIME_URL`. El build usa la primera para los enlaces canónicos y el sitemap de producción, y la segunda en las vistas previas. Al conectar `nexoralogistic.com.py` como dominio principal, volver a desplegar para actualizar esos enlaces. `SITE_ORIGIN` permite sobrescribir el origen cuando sea necesario.
 
-El portal consulta los envíos y comprobantes reales del OS y guarda solicitudes de envío. Para habilitar cuentas y operar, seguir [la guía del portal](docs/PORTAL_OPERATIVO.md). Google identifica al usuario y Nexora asigna su empresa.
+La web consulta pedidos individuales con códigos emitidos por el OS. Ver [seguimiento de pedidos](docs/PORTAL_OPERATIVO.md).
 
 ## Comportamientos incluidos
 
@@ -68,7 +68,7 @@ El portal consulta los envíos y comprobantes reales del OS y guarda solicitudes
 - Artículos filtrables, enlaces internos y copia del enlace para compartir.
 - Preguntas frecuentes desplegables.
 - Formulario con validación, resumen editable, descarga TXT y preparación de correo `mailto:`. No envía datos a un servidor ni afirma que el correo fue enviado.
-- Portal con Google, permisos por empresa, envíos y comprobantes del OS, resumen real y solicitudes persistidas. No contiene datos de demostración. Ver [la guía operativa](docs/PORTAL_OPERATIVO.md).
+- Seguimiento por código: estados, bultos y fechas reales, sin datos de demostración ni login. Ver [la guía operativa](docs/PORTAL_OPERATIVO.md).
 
 ## Antes del lanzamiento comercial
 

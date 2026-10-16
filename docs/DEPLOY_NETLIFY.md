@@ -20,8 +20,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-netlify.ps1
 
 El último comando imprime un ZIP nuevo de `artifacts/`, con únicamente el contenido de `dist/`. Usa rutas ZIP con `/`: `Compress-Archive` puede generar separadores de Windows que Netlify no interpreta como carpetas.
 
-En [el proyecto de Netlify](https://app.netlify.com/projects/nexoralogisticpy/overview), usar **choose a file** y subir ese ZIP. Esperar a **Currently published Production**. Comprobar HTTP 200 en `/`, `/clientes/`, `/privacidad/`, `/vendor/supabase.js` y las imágenes, y probar Google desde el portal, recarga y cierre de sesión.
+En [el proyecto de Netlify](https://app.netlify.com/projects/nexoralogisticpy/overview), usar **choose a file** y subir ese ZIP. Esperar a **Currently published Production**. Comprobar HTTP 200 en `/`, `/seguimiento/`, `/clientes/`, `/privacidad/`, `/tracking.js` y las imágenes. Probar el seguimiento sin sesión y el mensaje para códigos inexistentes.
 
 Al finalizar, cerrar esa terminal o retirar las variables de entorno anteriores antes de generar una copia para GitHub Pages. No se necesitan secretos OAuth en el build: permanecen en Supabase.
 
-Último despliegue verificado: `6ad16a5fce1d29fe95ecec3e`, 15 de octubre de 2026. El dominio de NIC.py aún requiere conectar DNS a Netlify.
+El dominio de NIC.py tiene los nameservers de Netlify solicitados; falta comprobar propagación DNS y certificado. Hasta entonces usar la dirección Netlify.
