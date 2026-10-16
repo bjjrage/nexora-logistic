@@ -4,18 +4,18 @@ La integración usa Supabase Auth con PKCE. Google identifica al usuario; Nexora
 
 ## Estado actual (15 de octubre de 2026)
 
-- Web p?blica: https://nexoralogisticpy.netlify.app
+- Web pública: https://nexoralogisticpy.netlify.app
 - Portal: https://nexoralogisticpy.netlify.app/clientes/
-- Google Auth Platform: proyecto `nexora-logistic`, cliente ?Nexora portal web?, audiencia externa y estado **En producci?n**.
-- Proveedor Google habilitado en Supabase `pnaqjenemmfydetkpokk`. El secreto permanece ?nicamente en la configuraci?n del proveedor.
+- Google Auth Platform: proyecto `nexora-logistic`, cliente «Nexora portal web», audiencia externa y estado **En producción**.
+- Proveedor Google habilitado en Supabase `pnaqjenemmfydetkpokk`. El secreto permanece únicamente en la configuración del proveedor.
 - Site URL de Supabase: `https://nexoralogisticpy.netlify.app`; retorno permitido: `https://nexoralogisticpy.netlify.app/clientes/`.
-- Login real verificado en local y en producci?n con la cuenta corporativa: retorno correcto, sesi?n persistente tras recargar y cierre de sesi?n. La cuenta queda pendiente porque todav?a no tiene empresa asignada.
-- Publicaci?n actual mediante Netlify Drop en el equipo corporativo. GitHub no est? conectado a Netlify para despliegues autom?ticos.
-- El dominio `nexoralogistic.com.py` todav?a requiere conectar DNS y HTTPS.
+- Login real verificado en local y en producción con la cuenta corporativa: retorno correcto, sesión persistente tras recargar y cierre de sesión. La cuenta queda pendiente porque todavía no tiene empresa asignada.
+- Publicación actual mediante Netlify Drop en el equipo corporativo. GitHub no está conectado a Netlify para despliegues automáticos.
+- El dominio `nexoralogistic.com.py` todavía requiere conectar DNS y HTTPS.
 
 ## 1. Publicar en Netlify
 
-Para repetir la publicaci?n manual, seguir [DEPLOY_NETLIFY.md](DEPLOY_NETLIFY.md). Como alternativa futura, importar `bjjrage/nexora-logistic`, rama `main`, en la cuenta de Netlify de Nexora. `netlify.toml` prepara el build al conectar Git.
+Para repetir la publicación manual, seguir [DEPLOY_NETLIFY.md](DEPLOY_NETLIFY.md). Como alternativa futura, importar `bjjrage/nexora-logistic`, rama `main`, en la cuenta de Netlify de Nexora. `netlify.toml` prepara el build al conectar Git.
 
 Anotar la URL HTTPS de producción que entregue Netlify. El build usa automáticamente `URL` como origen del login. Las vistas previas remiten al portal de producción. GitHub Pages muestra el aviso de preparación y no inicia sesiones: sus repositorios comparten el mismo origen del navegador.
 
@@ -92,6 +92,6 @@ Las 12 pruebas cubren identidad verificada, cuentas pendientes y suspendidas, er
 
 La migración `portal_customer_access` ya se aplicó al proyecto `pnaqjenemmfydetkpokk` de la organización Nexora. No volver a ejecutar el SQL de creación sobre ese proyecto. La auditoría de seguridad no encontró avisos. El índice de empresa se conserva para la clave foránea; el aviso informativo de índice todavía no usado es esperable en una base vacía.
 
-La prueba completa de ida a Google y regreso debe realizarse después de configurar el proveedor y las URLs. No se verificó un login real antes de disponer de esas credenciales.
+La prueba completa de ida a Google y regreso se realizó en local y en producción. Se verificaron la cuenta pendiente, la persistencia al recargar y el cierre de sesión. Las 15 páginas públicas responden HTTP 200 con enlaces canónicos correctos.
 
 Referencias: [Google en Supabase](https://supabase.com/docs/guides/auth/social-login/auth-google), [PKCE](https://supabase.com/docs/guides/auth/sessions/pkce-flow), [Redirect URLs](https://supabase.com/docs/guides/auth/redirect-urls), [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security), [aviso de índice no usado](https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index).

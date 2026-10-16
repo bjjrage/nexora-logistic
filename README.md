@@ -1,10 +1,14 @@
 # Nexora Logistic
 
-Web pública: https://bjjrage.github.io/nexora-logistic/
+Web pública: https://nexoralogisticpy.netlify.app
+
+Portal con Google: https://nexoralogisticpy.netlify.app/clientes/
+
+Copia en GitHub Pages: https://bjjrage.github.io/nexora-logistic/
 
 Repositorio: https://github.com/bjjrage/nexora-logistic
 
-GitHub Actions genera y publica automáticamente la web con cada actualización de `main`. Este repositorio contiene únicamente la landing pública.
+GitHub Actions actualiza automáticamente la copia de GitHub Pages con cada push a `main`. Netlify se publicó mediante Drop en la cuenta corporativa; los pushes todavía no actualizan Netlify automáticamente. Este repositorio contiene únicamente la web pública.
 
 Web multipágina responsive en español, basada en la identidad y las referencias facilitadas. Proyecto independiente del resto del espacio de trabajo.
 
@@ -47,9 +51,9 @@ Inicio, Nosotros, Servicios, cuatro fichas de servicio, Cobertura, Novedades, tr
 
 ## Publicar en Netlify
 
-Sitio p?blico actual: https://nexoralogisticpy.netlify.app. Para actualizarlo manualmente, seguir [la gu?a de despliegue](docs/DEPLOY_NETLIFY.md). Google est? habilitado en Supabase y en producci?n; se verificaron ingreso real, persistencia y salida. Las cuentas nuevas necesitan que Nexora les asigne una empresa.
+Sitio público actual: https://nexoralogisticpy.netlify.app. Para actualizarlo manualmente, seguir [la guía de despliegue](docs/DEPLOY_NETLIFY.md). Google está habilitado en Supabase y en producción; se verificaron ingreso real, persistencia y salida. Las cuentas nuevas necesitan que Nexora les asigne una empresa.
 
-### Conexi?n futura con GitHub
+### Conexión futura con GitHub
 
 Importar `bjjrage/nexora-logistic` desde GitHub en el espacio de Nexora, seleccionando `main` como rama de producción y dejando vacío el directorio base. El archivo `netlify.toml` configura Node.js 24, el comando `npm run check && npm test && npm run build`, la carpeta de publicación `dist` y las rutas desde la raíz del dominio.
 
