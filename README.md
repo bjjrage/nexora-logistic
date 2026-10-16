@@ -68,7 +68,7 @@ El acceso con Google y los permisos por empresa están implementados. Para activ
 - Artículos filtrables, enlaces internos y copia del enlace para compartir.
 - Preguntas frecuentes desplegables.
 - Formulario con validación, resumen editable, descarga TXT y preparación de correo `mailto:`. No envía datos a un servidor ni afirma que el correo fue enviado.
-- Portal con Google, sesión persistente, cierre de sesión, cuentas pendientes o suspendidas y acceso por empresa validado con Supabase y RLS. No muestra envíos ficticios ni publica datos del sistema interno.
+- Portal con Google, sesión persistente, cierre de sesión, cuentas pendientes o suspendidas y acceso por empresa validado con Supabase y RLS. Conserva el panel original de demostración: Mis envíos, Documentos y Resumen, con sus ejemplos claramente identificados. La demostración es pública y no consulta datos operativos ni publica datos del sistema interno.
 
 ## Antes del lanzamiento comercial
 

@@ -71,7 +71,7 @@ Para agregar otra persona de la misma empresa, crear otra membresía con el mism
 
 Para pausar una cuenta, cambiar su membresía a `status = 'suspended'`. Para pausar una empresa completa, cambiar `portal_companies.active` a `false`. La siguiente consulta del portal comprobará el nuevo permiso. Cerrar y volver a abrir sesión para comprobarlo visualmente.
 
-El portal muestra la identidad y la empresa habilitada. Los envíos, documentos y reportes operativos todavía requieren una integración de datos; no se publican datos del sistema interno.
+El portal muestra la identidad y la empresa habilitada. También conserva el panel de demostración original, recuperado del historial anterior al login: Mis envíos, Documentos y Resumen. Sus ejemplos son públicos y están identificados como ficticios; no otorgan permisos ni consultan operaciones. Los envíos, documentos y reportes operativos todavía requieren una integración de datos; no se publican datos del sistema interno.
 
 ## 5. Conectar el dominio
 
