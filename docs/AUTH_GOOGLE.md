@@ -2,9 +2,20 @@
 
 La integración usa Supabase Auth con PKCE. Google identifica al usuario; Nexora habilita su empresa en la base de datos. Una cuenta nueva queda pendiente hasta recibir esa habilitación.
 
+## Estado actual (15 de octubre de 2026)
+
+- Web p?blica: https://nexoralogisticpy.netlify.app
+- Portal: https://nexoralogisticpy.netlify.app/clientes/
+- Google Auth Platform: proyecto `nexora-logistic`, cliente ?Nexora portal web?, audiencia externa y estado **En producci?n**.
+- Proveedor Google habilitado en Supabase `pnaqjenemmfydetkpokk`. El secreto permanece ?nicamente en la configuraci?n del proveedor.
+- Site URL de Supabase: `https://nexoralogisticpy.netlify.app`; retorno permitido: `https://nexoralogisticpy.netlify.app/clientes/`.
+- Login real verificado en local y en producci?n con la cuenta corporativa: retorno correcto, sesi?n persistente tras recargar y cierre de sesi?n. La cuenta queda pendiente porque todav?a no tiene empresa asignada.
+- Publicaci?n actual mediante Netlify Drop en el equipo corporativo. GitHub no est? conectado a Netlify para despliegues autom?ticos.
+- El dominio `nexoralogistic.com.py` todav?a requiere conectar DNS y HTTPS.
+
 ## 1. Publicar en Netlify
 
-Importar `bjjrage/nexora-logistic`, rama `main`, en la cuenta de Netlify de Nexora. `netlify.toml` prepara el build. Netlify instala las dependencias y sirve `dist/`.
+Para repetir la publicaci?n manual, seguir [DEPLOY_NETLIFY.md](DEPLOY_NETLIFY.md). Como alternativa futura, importar `bjjrage/nexora-logistic`, rama `main`, en la cuenta de Netlify de Nexora. `netlify.toml` prepara el build al conectar Git.
 
 Anotar la URL HTTPS de producción que entregue Netlify. El build usa automáticamente `URL` como origen del login. Las vistas previas remiten al portal de producción. GitHub Pages muestra el aviso de preparación y no inicia sesiones: sus repositorios comparten el mismo origen del navegador.
 

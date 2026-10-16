@@ -47,6 +47,10 @@ Inicio, Nosotros, Servicios, cuatro fichas de servicio, Cobertura, Novedades, tr
 
 ## Publicar en Netlify
 
+Sitio p?blico actual: https://nexoralogisticpy.netlify.app. Para actualizarlo manualmente, seguir [la gu?a de despliegue](docs/DEPLOY_NETLIFY.md). Google est? habilitado en Supabase y en producci?n; se verificaron ingreso real, persistencia y salida. Las cuentas nuevas necesitan que Nexora les asigne una empresa.
+
+### Conexi?n futura con GitHub
+
 Importar `bjjrage/nexora-logistic` desde GitHub en el espacio de Nexora, seleccionando `main` como rama de producción y dejando vacío el directorio base. El archivo `netlify.toml` configura Node.js 24, el comando `npm run check && npm test && npm run build`, la carpeta de publicación `dist` y las rutas desde la raíz del dominio.
 
 Netlify proporciona automáticamente `URL` y `DEPLOY_PRIME_URL`. El build usa la primera para los enlaces canónicos y el sitemap de producción, y la segunda en las vistas previas. Al conectar `nexoralogistic.com.py` como dominio principal, volver a desplegar para actualizar esos enlaces. `SITE_ORIGIN` permite sobrescribir el origen cuando sea necesario.
