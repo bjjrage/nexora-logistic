@@ -10,15 +10,24 @@ export function orderStatus(counts) {
   if (Number(counts.DELIVERED)>0) return 'Entrega parcial';
   return states[['IN_TRANSIT','LOADED','RECEIVED','EXPECTED'].find(state=>Number(counts[state])>0)] || 'En proceso';
 }
-export async function lookupOrder(code,{config=globalThis.NEXORA_AUTH_CONFIG,fetcher=fetch,signal}={}) {
+export async function lookupOrder(code,{config=globalThis.NEXORA_AUTH_CONFIG,fetcher=fetch,signal,timeoutMs=15000}={}) {
   if (!validCode(code)) throw new Error('invalid-code');
   if (!config?.supabaseUrl || !config?.publishableKey) throw new Error('unconfigured');
-  const response=await fetcher(`${config.supabaseUrl}/rest/v1/rpc/track_order`,{method:'POST',headers:{apikey:config.publishableKey,'Content-Type':'application/json'},body:JSON.stringify({p_code:normalizeCode(code)}),signal,credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer'});
+  const controller=new AbortController();
+  const abort=()=>controller.abort(signal?.reason);
+  if(signal?.aborted)abort();else signal?.addEventListener('abort',abort,{once:true});
+  let timer;
+  try {
+  const deadline=new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(new Error('unavailable'));},timeoutMs);});
+  return await Promise.race([deadline,(async()=>{
+  const response=await fetcher(`${config.supabaseUrl}/rest/v1/rpc/track_order`,{method:'POST',headers:{apikey:config.publishableKey,'Content-Type':'application/json'},body:JSON.stringify({p_code:normalizeCode(code)}),signal:controller.signal,credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer'});
   if (!response.ok) throw new Error('unavailable');
   const data=await response.json();
   if(data===null) return null;
   if(data?.code!==normalizeCode(code) || !data.counts || !Array.isArray(data.events)) throw new Error('invalid-response');
   return data;
+  })()]);
+  }finally{clearTimeout(timer);signal?.removeEventListener('abort',abort);}
 }
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function date(value){const d=new Date(value);return Number.isNaN(d.getTime())?'Fecha no disponible':new Intl.DateTimeFormat('es-PY',{dateStyle:'medium',timeStyle:'short',timeZone:'America/Asuncion'}).format(d);}

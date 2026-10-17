@@ -52,6 +52,6 @@ for (const relative of ['styles.css', 'fonts/fonts.css']) {
   await writeFile(filename, prefixPaths(await readFile(filename, 'utf8')));
 }
 await writeFile(path.join(output, '.nojekyll'), '');
-await writeFile(path.join(output, '_headers'), '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: no-referrer\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n');
+await writeFile(path.join(output, '_headers'), await readFile(path.join(root,'public/_headers'),'utf8'));
 async function count(dir) { let n = 0; for (const entry of await readdir(dir, { withFileTypes: true })) n += entry.isDirectory() ? await count(path.join(dir, entry.name)) : 1; return n; }
 console.log(`Built Nexora Logistic: ${Object.keys(routes).length + 1} pages, ${await count(output)} files.`);
